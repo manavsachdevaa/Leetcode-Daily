@@ -1,36 +1,30 @@
-
 class Solution {
     public long minSumSquareDiff(int[] nums1, int[] nums2, int k1, int k2) {
-
-        int[] freq = new int[100001];
-        long k = (long) k1 + k2;
-
-        for (int i = 0; i < nums1.length; i++) {
-            int diff = Math.abs(nums1[i] - nums2[i]);
-            freq[diff]++;
+        int[]  diff=new int[100000 +1];
+        for(int i=0;i<nums1.length;i++){
+            int currdiff=Math.abs(nums1[i]-nums2[i]);
+            diff[currdiff]++;
         }
-
-        for (int i = 100000; i > 0 && k > 0; i--) {
-
-            if (freq[i] == 0) {
-                continue;
+        int k=k1+k2;
+        for(int i=diff.length-1;i>0 && k>0;i--){
+            if(diff[i]!=0){
+                int ct=diff[i];
+                int minops=Math.min(k,ct);
+                diff[i]=diff[i]-minops;
+                diff[i-1]=diff[i-1]+minops;
+                k=k-minops;
             }
 
-            long reduce = Math.min(k, freq[i]);
-
-            freq[i] -= (int) reduce;
-            freq[i - 1] += (int) reduce;
-
-            k -= reduce;
         }
-
-        long ans = 0;
-
-        for (int i = 1; i <= 100000; i++) {
-            ans += (long) i * i * freq[i];
+        long ans=0;
+        for(int i=0;i<diff.length;i++){
+            if(diff[i]!=0){
+                 ans=ans+((long)i*(long)i)*diff[i];
+            }
         }
-
         return ans;
+
+       
+
     }
 }
-
