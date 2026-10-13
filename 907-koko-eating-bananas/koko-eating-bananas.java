@@ -4,21 +4,19 @@ class Solution {
         for(int i=0;i<piles.length;i++){
             max=Math.max(max,piles[i]);
         }
-        int low=1;
-        int high=max;
+        int min=1;
         int ans=0;
-        while(low<=high){
-            int mid=(low+high)/2;
+        while(min<=max){
+            int mid=(min+max)/2;
             if(isvalid(piles,mid)<=h){
                 ans=mid;
-                high=mid-1;
+                max=mid-1;
             }
             else{
-                low=mid+1;
+                min=mid+1;
             }
         }
         return ans;
-        
     }
     public long isvalid(int[] piles,int mid){
         long res=0;
