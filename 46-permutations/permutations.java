@@ -5,18 +5,18 @@ class Solution {
         backtrack(nums,temp);
         return ans;
     }
-    public void backtrack(int[]nums,List<Integer> curr){
-        if(curr.size()==nums.length){
-            ans.add(new ArrayList<>(curr));
+    public void backtrack(int[]nums,List<Integer> temp){
+        if(temp.size()==nums.length){
+            ans.add(new ArrayList<>(temp));
             return;
         }
         for(int i=0;i<nums.length;i++){
-            if(curr.contains(nums[i])){
+            if(temp.contains(nums[i])){
                 continue;
             }
-            curr.add(nums[i]);
-            backtrack(nums,curr);
-            curr.remove(curr.size()-1);
+            temp.add(nums[i]);
+            backtrack(nums,temp);
+            temp.remove(temp.size()-1);
         }
     }
 }
