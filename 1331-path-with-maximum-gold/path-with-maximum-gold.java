@@ -4,27 +4,26 @@ class Solution {
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
                 if(grid[i][j]!=0){
-                    solve(i,j,grid,0);
+                    backtrack(i,j,0,grid);
                 }
             }
         }
         return maxsum;
     }
-    public void solve(int i,int j,int[][] grid,int currsum){
+    public void backtrack(int i,int j,int currsum,int[][] grid){
         int r=grid.length;
         int c=grid[0].length;
-        if(i<0 || i>=r || j<0 || j>=c || grid[i][j]==0){
+        if(i<0 || j<0 || i>=r || j>=c || grid[i][j]==0){
             maxsum=Math.max(maxsum,currsum);
             return;
         }
         int temp=grid[i][j];
         grid[i][j]=0;
         currsum+=temp;
-        solve(i,j+1,grid,currsum);
-        solve(i,j-1,grid,currsum);
-        solve(i-1,j,grid,currsum);
-        solve(i+1,j,grid,currsum);
+        backtrack(i,j+1,currsum,grid);
+        backtrack(i,j-1,currsum,grid);
+        backtrack(i+1,j,currsum,grid);
+        backtrack(i-1,j,currsum,grid);
         grid[i][j]=temp;
-
     }
 }
