@@ -1,14 +1,15 @@
 class Solution {
-
     public int sortPermutation(int[] nums) {
-        int n = nums.length;
-        int res = Integer.MAX_VALUE;
-        for (int i = 0; i < n; ++i) {
-            if (nums[i] == i) {
-                continue;
+        int k=-1; // -1 stores all set bits in java
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=i){
+                k=k&nums[i];
             }
-            res &= nums[i];
         }
-        return res == Integer.MAX_VALUE ? 0 : res;
+        if(k==-1){
+            return 0;
+        }
+        return k;
+        
     }
 }
