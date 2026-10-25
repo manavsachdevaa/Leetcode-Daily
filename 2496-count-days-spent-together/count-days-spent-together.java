@@ -1,45 +1,26 @@
 class Solution {
-
-    public int countDaysTogether(
-        String arriveAlice,
-        String leaveAlice,
-        String arriveBob,
-        String leaveBob
-    ) {
-        int[] datesOfMonths = {
-            31,
-            28,
-            31,
-            30,
-            31,
-            30,
-            31,
-            31,
-            30,
-            31,
-            30,
-            31,
-        };
-        int[] prefixSum = new int[13];
-        for (int i = 0; i < 12; i++) {
-            prefixSum[i + 1] = prefixSum[i] + datesOfMonths[i];
+    int [] days={
+        31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+    };
+    public int countdays(String day){
+        int month=Integer.parseInt(day.substring(0,2));
+        int date=Integer.parseInt(day.substring(3,5));
+        int total_days=date;
+        for(int i=0;i<month-1;i++){
+            total_days+=days[i];
         }
-
-        int arriveAliceDay = calculateDayOfYear(arriveAlice, prefixSum);
-        int leaveAliceDay = calculateDayOfYear(leaveAlice, prefixSum);
-        int arriveBobDay = calculateDayOfYear(arriveBob, prefixSum);
-        int leaveBobDay = calculateDayOfYear(leaveBob, prefixSum);
-        return Math.max(
-            0,
-            Math.min(leaveAliceDay, leaveBobDay) -
-                Math.max(arriveAliceDay, arriveBobDay) +
-                1
-        );
+        return total_days;
     }
-
-    private int calculateDayOfYear(String day, int[] prefixSum) {
-        int month = Integer.parseInt(day.substring(0, 2));
-        int date = Integer.parseInt(day.substring(3));
-        return prefixSum[month - 1] + date;
+    public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
+        int alice_arrive=countdays(arriveAlice);
+        int alice_leave=countdays(leaveAlice);
+        int bob_arrive=countdays(arriveBob);
+        int bob_leave=countdays(leaveBob);
+        int start=Math.max(alice_arrive,bob_arrive);
+        int end=Math.min(alice_leave,bob_leave);
+        if(start>end){
+            return 0;
+        }
+        return end-start+1;
     }
 }
