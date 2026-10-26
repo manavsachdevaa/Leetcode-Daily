@@ -8,13 +8,12 @@ class Solution {
         if(grid[i][j]==1){
             return true;
         }
-        grid[i][j]=1; //visited
-        boolean left=dfs(grid,i,j-1);
-        boolean right=dfs(grid,i,j+1);
-        boolean up=dfs(grid,i-1,j);
-        boolean down=dfs(grid,i+1,j);
-        return left && right && up && down;
-
+        grid[i][j]=1;
+        boolean l=dfs(grid,i,j-1);
+        boolean r=dfs(grid,i,j+1);
+        boolean u=dfs(grid,i-1,j);
+        boolean d=dfs(grid,i+1,j);
+        return l && r && u && d;
 
     }
     public int closedIsland(int[][] grid) {
@@ -22,10 +21,8 @@ class Solution {
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
                 if(grid[i][j]==0 && dfs(grid,i,j)==true){
-                
                     ct++;
-                
-            }
+                }
             }
         }
         return ct;
