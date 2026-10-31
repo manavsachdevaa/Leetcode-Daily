@@ -10,6 +10,6 @@ class Solution {
             }
             maxindex=Math.max(maxindex,i+nums[i]);
         }
-        return false;
+        return true;
     }
 }
