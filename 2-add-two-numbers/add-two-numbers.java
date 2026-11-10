@@ -13,18 +13,19 @@ class Solution {
         ListNode anshead=null;
         ListNode temp=anshead;
         int carry=0;
-        while(l1!=null || l2!=null || carry!=0){
+        while(l1!=null || l2!=null || carry>0){
             int val1=(l1==null)?0:l1.val;
             int val2=(l2==null)?0:l2.val;
             int sum=val1+val2+carry;
-            ListNode newnode=new ListNode(sum%10);
+            ListNode temp1=new ListNode(sum%10);
             carry=sum/10;
+
             if(anshead==null){
-                anshead=newnode;
-                temp=newnode;
+                anshead=temp1;
+                temp=temp1;
             }
             else{
-                temp.next=newnode;
+                temp.next=temp1;
                 temp=temp.next;
             }
             if(l1!=null){
@@ -33,6 +34,7 @@ class Solution {
             if(l2!=null){
                 l2=l2.next;
             }
+            
         }
         return anshead;
     }
