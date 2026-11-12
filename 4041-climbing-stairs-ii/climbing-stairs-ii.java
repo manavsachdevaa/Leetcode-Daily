@@ -10,15 +10,12 @@ class Solution {
         for(int j=1;j<=3;j++){
             int next=i+j;
             if(next<=n){
-                int currcost=costs[next-1] + j*j + solve(next,n,costs,dp);
+                int currcost=costs[next-1] + j*j + solve(next,n,costs,dp); 
                 cost=Math.min(cost,currcost);
-
             }
-             dp[i]=cost;
-
+            dp[i]=cost;
         }
         return dp[i];
-
     }
     public int climbStairs(int n, int[] costs) {
         int[] dp=new int[n+1];
